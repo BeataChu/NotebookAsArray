@@ -75,4 +75,11 @@ public class Notebook {
         return -1;
     }
 
+    public void modifyByNameLastName (String name, String lastName, String newName, String newLastName, String newPhoneNumber) {
+        modify(findByNameLastName(name, lastName), newName, newLastName, newPhoneNumber);
+    }
+
+    public void deleteByNameLastName (String name, String lastName) {
+        delete(findByNameLastName(name, lastName));
+    }
 }
