@@ -1,5 +1,6 @@
 import java.util.Arrays;
 
+// class for organizing array of entries
 public class Notebook {
     // step for changing array size
     final static int STEP = 10;

@@ -1,4 +1,4 @@
-
+//single entry class
 public class Entry {
     private String name;;
     private String lastName;
