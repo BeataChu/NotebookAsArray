@@ -2,10 +2,10 @@ import java.util.Arrays;
 
 public class Notebook {
     // step for changing array size
-    private final int step = 10;
+    final static int STEP = 10;
 
 
-    private Entry[] entries = new Entry[step];
+    private Entry[] entries = new Entry[STEP];
     //number of entries
     private int count = 0;
 
@@ -14,15 +14,15 @@ public class Notebook {
         Entry entry = new Entry(name, lastName, phoneNumber);
 
         if (count == entries.length) {
-            entries = Arrays.copyOf(entries,count+step);
+            entries = Arrays.copyOf(entries,count+STEP);
         }
 
         entries[count++] = entry;
     }
 
     // modify entry by index number
-    public void modify(int index, String name, String lastName, String phoneNumber) throws IndexOutOfBoundsException{
-        if (index == -1 || index >= count) {
+    public void modify(int index, String name, String lastName, String phoneNumber){
+        if (index < 0 || index >= count) {
             throw new IndexOutOfBoundsException("Запись под данным индексом не существует");
         }
         entries[index].modify(name, lastName, phoneNumber);
@@ -30,7 +30,7 @@ public class Notebook {
 
     //delete entry
     public void delete(int index) throws IndexOutOfBoundsException{
-        if (index == -1 || index >= count) {
+        if (index < 0 || index >= count) {
             throw new IndexOutOfBoundsException("Запись под данным индексом не существует");
         }
         count--;
@@ -38,8 +38,8 @@ public class Notebook {
             entries[i] = entries[i+1];
         }
         entries[count] = null;
-        if (entries.length > count + step) {
-            entries = Arrays.copyOf(entries, count + step/2);
+        if (entries.length > count + STEP) {
+            entries = Arrays.copyOf(entries, count + STEP/2);
         }
     }
 
@@ -60,7 +60,8 @@ public class Notebook {
                 return i;
             }
         }
-        return -1; //if no such entry or if phonebook is empty
+        //if no such entry or if phonebook is empty
+        return -1;
     }
 
     //returns entry index by phone number
@@ -70,25 +71,8 @@ public class Notebook {
                 return i;
             }
         }
-        return -1; //if no such entry or if phonebook is empty
+        //if no such entry or if phonebook is empty
+        return -1;
     }
 
-    /*just in case - methods for modifying entries indirectly (by name + last name and by phone number)
-
-    public void modifyByNameLastName(String name, String lastName, String newName, String newLastName, String newPhoneNumber) {
-        modify(findByNameLastName(name, lastName), newName, newLastName, newPhoneNumber);
-    }
-
-    public void deleteByNameLastName (String name, String lastName) {
-        delete(findByNameLastName(name, lastName));
-    }
-
-    public void modifyByPhoneNumber(String phoneNumber, String newName, String newLastName, String newPhoneNumber) {
-        modify(findByPhoneNumber(phoneNumber), newName, newLastName, newPhoneNumber);
-    }
-
-    public void deleteByPhoneNumber (String phoneNumber) {
-        delete(findByPhoneNumber(phoneNumber));
-    }
-    */
 }

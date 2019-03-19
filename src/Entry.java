@@ -1,16 +1,16 @@
 public class Entry {
-    private String name ="";
-    private String lastName="";
-    private String phoneNumber="";
+    private String name;;
+    private String lastName;
+    private String phoneNumber;
 
     public Entry(String name, String lastName, String phoneNumber){
         this.modify(name, lastName, phoneNumber);
     }
 
     public void modify(String name, String lastName, String phoneNumber) {
-        if (name != null && !name.isEmpty()) this.name = name;
-        if (lastName != null && !lastName.isEmpty())this.lastName = lastName;
-        if (phoneNumber != null && !phoneNumber.isEmpty())this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getName() {
