@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-// comment for commit
+
 public class Interaction {
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static Notebook phoneBook = new Notebook();
@@ -38,7 +38,7 @@ public class Interaction {
         System.out.println("4 - распечатать все записи");
         System.out.println("0 - выход");
     }
-
+    //data input: readLine throws exception, myReadLine catches it
     private static String myReadLine(){
         String answer = "";
         try {
@@ -58,27 +58,58 @@ public class Interaction {
         System.out.println("Запись добавлена" + "\n");
     }
 
+    //modify entry
     private static void modifyEntry() {
+        System.out.println("Изменить запись: 1 - по имени и фамилии, 2 - по номеру телефона");
+        String answer = myReadLine();
         try {
-            phoneBook.modifyByNameLastName(
-                    requestName(),
-                    requestLastName(),
-                    requestNewName(),
-                    requestNewLastName(),
-                    requestNewPhoneNumber());
-            System.out.println("Запись изменена" + "\n");
+            int index =-1;
+            if (answer.equals("1")) {
+                index = phoneBook.findByNameLastName(
+                        requestName(),
+                        requestLastName());
+
+            } else if (answer.equals("2")) {
+                index = phoneBook.findByPhoneNumber(
+                        requestPhoneNumber());
+            } else {
+                System.out.println("Введен неверный символ");
+                return;
+            }
+            if (index >= 0) {
+                phoneBook.modify(
+                        index,
+                        requestNewName(),
+                        requestNewLastName(),
+                        requestNewPhoneNumber());
+                System.out.println("Запись изменена" + "\n");
+            }
+
+
         } catch (Exception e) {
             System.out.println("Запись не найдена" + "\n");
         }
     }
 
+    //delete entry
     private static void deleteEntry() {
-
+        System.out.println("Удалить запись: 1 - по имени и фамилии, 2 - по номеру телефона");
+        String answer = myReadLine();
         try {
-            phoneBook.deleteByNameLastName(
-                    requestName(),
-                    requestLastName()
-            );
+            int index = -1;
+            if (answer.equals("1")) {
+                index = phoneBook.findByNameLastName(
+                        requestName(),
+                        requestLastName());
+
+            } else if (answer.equals("2")) {
+                index = phoneBook.findByPhoneNumber(
+                        requestPhoneNumber());
+            } else {
+                System.out.println("Введен неверный символ");
+                return;
+            }
+            phoneBook.delete(index);
             System.out.println("Запись удалена" + "\n");
         } catch (Exception e) {
             System.out.println("Запись не найдена" + "\n");

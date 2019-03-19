@@ -1,4 +1,4 @@
-// comment for commit
+
 public class Entry {
     private String name;;
     private String lastName;
@@ -18,34 +18,22 @@ public class Entry {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String toString(){
         StringBuilder result = new StringBuilder();
-        if (!name.isEmpty()) result.append("name: ").append(name);
+        if (!name.isEmpty()) result.append("имя: ").append(name);
         if (result.length() != 0) result.append(", ");
-        if (!lastName.isEmpty()) result.append("last name: ").append(lastName);
+        if (!lastName.isEmpty()) result.append("фамилия: ").append(lastName);
         if (result.length() != 0) result.append(", ");
-        if (!phoneNumber.isEmpty()) result.append("phone number: ").append(phoneNumber);
-        if (result.length() == 0) result.append("empty entry");
+        if (!phoneNumber.isEmpty()) result.append("номер телефона: ").append(phoneNumber);
+        if (result.length() == 0) result.append("пустая запись");
         return result.toString();
     }
 }

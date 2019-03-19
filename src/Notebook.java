@@ -1,6 +1,5 @@
 import java.util.Arrays;
 
-// comment for commit
 public class Notebook {
     // step for changing array size
     final static int STEP = 10;
@@ -13,16 +12,14 @@ public class Notebook {
     //add entry
     public void add(String name, String lastName, String phoneNumber) {
         Entry entry = new Entry(name, lastName, phoneNumber);
-
         if (count == entries.length) {
-            entries = Arrays.copyOf(entries,count+STEP);
+            entries = Arrays.copyOf(entries, count + STEP);
         }
-
         entries[count++] = entry;
     }
 
     // modify entry by index number
-    public void modify(int index, String name, String lastName, String phoneNumber){
+    void modify(int index, String name, String lastName, String phoneNumber) {
         if (index < 0 || index >= count) {
             throw new IndexOutOfBoundsException("Запись под данным индексом не существует");
         }
@@ -30,17 +27,17 @@ public class Notebook {
     }
 
     //delete entry
-    public void delete(int index) throws IndexOutOfBoundsException{
+    void delete(int index) {
         if (index < 0 || index >= count) {
             throw new IndexOutOfBoundsException("Запись под данным индексом не существует");
         }
         count--;
         for (int i = index; i < count; i++) {
-            entries[i] = entries[i+1];
+            entries[i] = entries[i + 1];
         }
         entries[count] = null;
         if (entries.length > count + STEP) {
-            entries = Arrays.copyOf(entries, count + STEP/2);
+            entries = Arrays.copyOf(entries, count + STEP / 2);
         }
     }
 
@@ -48,9 +45,9 @@ public class Notebook {
     public String printOut() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < count; i++) {
-            result.append(i+1).append(": ").append(entries[i].toString()).append("\n");
+            result.append(i + 1).append(": ").append(entries[i].toString()).append("\n");
         }
-        result.append("Entries count: ").append(count).append("\nArray length: ").append(entries.length).append("\n");
+        result.append("Число записей: ").append(count).append("\nДлина массива: ").append(entries.length).append("\n");
         return result.toString();
     }
 
@@ -74,13 +71,5 @@ public class Notebook {
         }
         //if no such entry or if phonebook is empty
         return -1;
-    }
-
-    public void modifyByNameLastName (String name, String lastName, String newName, String newLastName, String newPhoneNumber) {
-        modify(findByNameLastName(name, lastName), newName, newLastName, newPhoneNumber);
-    }
-
-    public void deleteByNameLastName (String name, String lastName) {
-        delete(findByNameLastName(name, lastName));
     }
 }
